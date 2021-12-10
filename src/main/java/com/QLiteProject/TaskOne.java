@@ -2,28 +2,28 @@ package com.QLiteProject;
 
 import java.util.Arrays;
 
-public class TaskOne {
+public class TaskOne implements Events{
     private final int maxValues = 3;
 
     public TaskOne() {
-        run();
+        // run();
     }
 
+    @Override
     public void run() {
         Util.printCMDLine("Инициализация процесса. Задание №1.", true);
         Util.printCMDLine("Введите массив чисел, строго разделяя: ");
 
-        String inputString = Util.readCMDLine();
-        int[] inputIntegers = Util.parseInt(inputString);
+        String input = Util.readCMDLine();
+        int[] collection = Util.parseInt(input);
 
-        if (inputIntegers.length > maxValues) {
-            inputIntegers = Arrays.stream(inputIntegers).sorted().toArray();
-            int[] outputIntegers = Arrays.copyOfRange(inputIntegers, inputIntegers.length - maxValues, inputIntegers.length);
-            Util.printCMDLine(Arrays.toString(outputIntegers), true);
+        if (collection.length > maxValues) {
+            collection = Arrays.stream(collection).sorted().toArray();
+            int[] output = Arrays.copyOfRange(collection, collection.length - maxValues, collection.length);
+            Util.printCMDLine("Результат: " + Arrays.toString(output), true);
             Util.exitCMD();
         } else {
-            Util.printCMDLine("Некорректный ввод пользователя.", true);
-            run();
+            Util.warningActionCMD(this);
         }
     }
 }

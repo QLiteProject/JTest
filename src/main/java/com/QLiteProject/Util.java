@@ -31,7 +31,7 @@ public class Util {
     //endregion
 
     //region In & Out methods
-    private static final Scanner scannerCMDLine = new Scanner(System.in);
+    private static final Scanner scannerCMDLine = new Scanner(System.in, "UTF-8");
 
     public static String readCMDLine() {
         return scannerCMDLine.nextLine();
@@ -40,6 +40,11 @@ public class Util {
     public static void exitCMD() {
         printCMDLine("Нажмите любую клавишу для выхода из приложения...", true);
         readCMDLine();
+    }
+
+    public static void warningActionCMD(Events events) {
+        printCMDLine("%nНекорректный ввод пользователя.", true);
+        if (events != null) events.run();
     }
 
     public static void printCMDLine(String text) {
