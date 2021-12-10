@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'edu.sc.seis.launch4j' version '2.5.1'
+}
+
+group 'com.QLiteProject'
+version 'PRE-ALPHA'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass.set('Launcher')
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes (
+                'Manifest-Version': '1.0',
+                'Main-Class': "${project.group}.${application.mainClass}",
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version
+        )
+    }
+}
+
+tasks.named('run') {
+    standardInput = System.in
+}
+
+launch4j {
+    headerType = 'console'
+    outfile = "${project.name} (${project.version})"
+    mainClassName = "${project.group}.${application.mainClass}"
+}
