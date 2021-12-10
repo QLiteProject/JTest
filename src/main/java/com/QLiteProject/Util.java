@@ -17,6 +17,17 @@ public class Util {
         }
         return result.stream().mapToInt(Integer::parseInt).toArray();
     }
+
+    public static int[] splitInt(int variable) {
+        List<Integer> result = new ArrayList<>();
+        while (true) {
+            result.add(variable % 10);
+            variable /= 10;
+            if (variable == 0) {
+                return result.stream().mapToInt(i -> i).toArray();
+            }
+        }
+    }
     //endregion
 
     //region In & Out methods
