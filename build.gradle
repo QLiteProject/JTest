@@ -12,7 +12,7 @@ repositories {
 }
 
 application {
-    mainClass.set('Launcher')
+    mainClassName = 'Launcher'
 }
 
 tasks.withType(JavaCompile) {
@@ -26,7 +26,7 @@ tasks.named('jar') {
     manifest {
         attributes (
                 'Manifest-Version': '1.0',
-                'Main-Class': "${project.group}.${application.mainClass}",
+                'Main-Class': "${project.group}.${application.mainClassName}",
                 'Implementation-Title': project.name,
                 'Implementation-Version': project.version
         )
@@ -39,6 +39,6 @@ tasks.named('run') {
 
 launch4j {
     headerType = 'console'
-    outfile = "${project.name} (${project.version})"
-    mainClassName = "${project.group}.${application.mainClass}"
+    outfile = "${project.name} (${project.version}).exe"
+    mainClassName = "${project.group}.${application.mainClassName}"
 }
