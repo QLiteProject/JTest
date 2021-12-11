@@ -1,6 +1,7 @@
 package com.QLiteProject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -9,13 +10,13 @@ import java.util.regex.Pattern;
 public class Util {
     //region Util
     public static int[] parseInt(String string) {
-        List <String> result = new ArrayList<>();
+        List <Integer> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("(-?\\d+)");
         Matcher matcher = pattern.matcher(string);
         while (matcher.find()) {
-            result.add(matcher.group());
+            result.add(Integer.parseInt(matcher.group()));
         }
-        return result.stream().mapToInt(Integer::parseInt).toArray();
+        return result.stream().mapToInt(i -> i).toArray();
     }
 
     public static int[] splitInt(int variable) {
@@ -27,6 +28,10 @@ public class Util {
                 return result.stream().mapToInt(i -> i).toArray();
             }
         }
+    }
+
+    public static List<Integer> intAsListInteger (int[] array) {
+        return new ArrayList<>(Arrays.asList(Arrays.stream(array).boxed().toArray(Integer[]::new)));
     }
     //endregion
 
@@ -43,7 +48,7 @@ public class Util {
     }
 
     public static void warningActionCMD(Events events) {
-        printCMDLine("%nНекорректный ввод пользователя.", true);
+        printCMDLine("Некорректный ввод пользователя.", true);
         if (events != null) events.run();
     }
 
